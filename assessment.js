@@ -15,14 +15,28 @@ assessmentButton.addEventListener( //イベント検知設定の追加
 
     // 診断結果表示エリアの作成
     resultDivision.innerText = '' //divタグを空文字で上書きすることで、からにする
-    const heading = document.createElement('h3') //h3タグの作成 「create（クリエイト） : 作成する」
-    heading.innerText = '診断結果';//タグの内側のテキストを設定
-    resultDivision.appendChild(heading);//divタグの子要素として 「append（アペンド） : 追加する」
-    
+
+    //headerDivisionの作成
+    const headerDivision = document.createElement('div') //divタグの作成 「create（クリエイト） : 作成する」
+    headerDivision.setAttribute('class', 'card-header text-bg-primary') //divタグに属性(class)を追加 「set（セット） : 設定する」
+    headerDivision.innerText = '診断結果';//divタグの内側のテキストを設定
+
+    //bodyDivisionの作成
+    const bodyDivision = document.createElement('div') //divタグの作成 「create（クリエイト） : 作成する」
+    bodyDivision.setAttribute('class', 'card-body') //divタグに属性(class)を追加 「set（セット） : 設定する」
+
     const paragraph = document.createElement('p');//pタグを作成
-    const result = assessment(userName);//診断結果を作成
+    paragraph.setAttribute('class', 'card-text') //pタグに属性(class)を追加 「set（セット） : 設定する」
+    const result = assessment(userName);
     paragraph.innerText = result;//pタグのうちわ側のテキストを作成
-    resultDivision.appendChild(paragraph);//divタグの子要素としてpタグ追加
+    bodyDivision.appendChild(paragraph);
+
+    //bodyDivisionにBootstrapのスタイルを適用する
+    resultDivision.setAttribute('class', 'card') //divタグに属性(class)を追加 「set（セット） : 設定する」
+
+    //headerDivisionとbodyDivisionをresultDivisionに差し込む
+    resultDivision.appendChild(headerDivision);
+    resultDivision.appendChild(bodyDivision);
 
     //ツイートエリアの作成 
     tweetDivision.innerText = '';
@@ -45,7 +59,7 @@ assessmentButton.addEventListener( //イベント検知設定の追加
   }
 );
 
-userNameInput,addEventListener(
+userNameInput.addEventListener(
   'keydown',
   (event) => {
     if(event.key === 'Enter') {
